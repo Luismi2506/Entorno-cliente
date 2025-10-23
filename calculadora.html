@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea - Operaciones y Bucles</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color:#2D2B33f5;
+            padding: 25px;
+        }
+        .contenedor {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(114, 114, 114, 0.1);
+        }
+        #salida {
+            min-height: 60px;
+            background: #fafafa;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .badge {
+            margin: 3px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container contenedor">
+    <h2 class="text-center mb-4">Operaciones y Bucles</h2>
+
+    <!-- Entradas -->
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="n1" class="form-label">Número 1</label>
+            <input type="number" id="n1" class="form-control" placeholder="ponme un numerito aqui">
+        </div>
+        <div class="col-md-6">
+            <label for="n2" class="form-label">Número 2</label>
+            <input type="number" id="n2" class="form-control" placeholder="ponte otro número aqui rey">
+        </div>
+    </div>
+
+    <!-- Operaciones -->
+    <div class="mb-3" style="text-align: center;">
+        <button class="btn btn-primary btn-sm" onclick="hacerOperacion('sumar')">Sumar</button>
+        <button class="btn btn-primary btn-sm" onclick="hacerOperacion('restar')">Restar</button>
+        <button class="btn btn-primary btn-sm" onclick="hacerOperacion('multiplicar')">Multiplicar</button>
+        <button class="btn btn-primary btn-sm" onclick="hacerOperacion('dividir')">Dividir</button>
+        <button class="btn btn-primary btn-sm" onclick="hacerOperacion('potencia')">Potencia</button>
+        <button class="btn btn-primary btn-sm" onclick="hacerOperacion('modulo')">Módulo</button>
+    </div>
+
+    <!-- Bucles (texto) -->
+    <div class="mb-3" style="text-align: center;">
+        <button class="btn btn-success btn-sm" onclick="hacerBucle('for')">For</button>
+        <button class="btn btn-success btn-sm" onclick="hacerBucle('while')">While</button>
+        <button class="btn btn-success btn-sm" onclick="hacerBucle('doWhile')">Do...While</button>
+    </div>
+
+    <!-- Bucles (badges) -->
+    <div class="mb-3" style="text-align: center;">
+        <button class="btn btn-warning btn-sm" onclick="hacerBucle('for', true)">For</button>
+        <button class="btn btn-warning btn-sm" onclick="hacerBucle('while', true)">While</button>
+        <button class="btn btn-warning btn-sm" onclick="hacerBucle('doWhile', true)">Do...While</button>
+    </div>
+
+    <h5>Resultado:</h5>
+    <div id="salida"></div>
+</div>
+
+<script>
+    // Función para obtener los números
+    function obtenerNumeros() {
+        const a = parseFloat(document.getElementById('n1').value);
+        const b = parseFloat(document.getElementById('n2').value);
+        return { a, b };
+    }
+
+    // Operaciones
+    function hacerOperacion(tipo) {
+        const { a, b } = obtenerNumeros();
+        let r;
+
+        if (isNaN(a) || isNaN(b)) {
+            document.getElementById('salida').innerHTML = "ponme números en los dosh camposh";
+            return;
+        }
+
+        switch (tipo) {
+            case 'sumar': r = a + b; break;
+            case 'restar': r = a - b; break;
+            case 'multiplicar': r = a * b; break;
+            case 'dividir':
+                if (b === 0) {
+                    document.getElementById('salida').innerHTML = "no se que me da, pero creo que entre 0 no se puede dividir";
+                    return;
+                }
+                r = a / b;
+                break;
+            case 'potencia': r = Math.pow(a, b); break;
+            case 'modulo': r = a % b; break;
+        }
+
+        document.getElementById('salida').innerHTML = r;
+    }
+
+    // Bucles
+    function hacerBucle(tipo, conBadges = false) {
+        const { a } = obtenerNumeros();
+        let salida = "";
+        let i = 1;
+
+        if (isNaN(a)) {
+            document.getElementById('salida').innerHTML = "tienes que ingresar un numero válido en el campo 1 para hacer bucles";
+            return;
+        }
+
+        if (tipo === 'for') {
+            for (i = 1; i <= a; i++) {
+                salida += conBadges ? `<span class='badge bg-primary'>${i}</span>` : `Repetición ${i}<br>`;
+            }
+        } else if (tipo === 'while') {
+            i = 1;
+            while (i <= a) {
+                salida += conBadges ? `<span class='badge bg-success'>${i}</span>` : `Repetición ${i}<br>`;
+                i++;
+            }
+        } else if (tipo === 'doWhile') {
+            i = 1;
+            do {
+                salida += conBadges ? `<span class='badge bg-danger'>${i}</span>` : `Repetición ${i}<br>`;
+                i++;
+            } while (i <= a);
+        }
+
+        document.getElementById('salida').innerHTML = salida || "no hay repeticiones";
+    }
+</script>
+
+</body>
+</html>
