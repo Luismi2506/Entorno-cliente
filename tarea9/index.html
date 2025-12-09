@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Solución práctica – Tema 9</title>
+    <style>
+        .correcto {
+            border: 2px solid green !important;
+        }
+
+        .incorrecto {
+            border: 2px solid red !important;
+        }
+
+        .mensaje {
+            font-size: 14px;
+            color: #555;
+            margin: 2px 0 5px 0;
+        }
+
+        .ok {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">Solución práctica – Tema 9</h2>
+        <h3 id="saludoPrincipal" class="text-primary text-center mb-3"></h3>
+
+        <form id="miFormulario" class="p-4 bg-white shadow rounded">
+
+            <div class="mb-3">
+                <label class="form-label">Nombre de usuario</label>
+                <input type="text" class="form-control" id="nombre" onfocus="mostrarAyuda('nombre')"
+                    onblur="ocultarAyuda('nombre')" oninput="validarCampo('nombre')">
+                <p id="ayuda-nombre" class="mensaje"></p>
+                <p id="msg-nombre" class="mensaje"></p>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Correo electrónico</label>
+                <input type="text" class="form-control" id="email" onfocus="mostrarAyuda('email')"
+                    onblur="ocultarAyuda('email')" oninput="validarCampo('email')">
+                <p id="ayuda-email" class="mensaje"></p>
+                <p id="msg-email" class="mensaje"></p>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="password" onfocus="mostrarAyuda('password')"
+                    onblur="ocultarAyuda('password')" oninput="validarCampo('password')">
+                <p id="ayuda-password" class="mensaje"></p>
+                <p id="msg-password" class="mensaje"></p>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Edad</label>
+                <input type="text" class="form-control" id="edad" onfocus="mostrarAyuda('edad')"
+                    onblur="ocultarAyuda('edad')" oninput="validarCampo('edad')">
+                <p id="ayuda-edad" class="mensaje"></p>
+                <p id="msg-edad" class="mensaje"></p>
+            </div>
+
+            <div class="form-check mb-3">
+                <input type="checkbox" class="form-check-input" id="recordarme">
+                <label class="form-check-label">Recordarme</label>
+            </div>
+
+            <button type="submit" class="btn btn-success">Enviar</button>
+            <button type="button" id="btnEliminar" class="btn btn-danger ms-2">Eliminar cookie</button>
+
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
